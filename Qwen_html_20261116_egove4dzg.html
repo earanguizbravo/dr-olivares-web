@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniLipopapada | Dr. Rodrigo Olivares — Armonización Orofacial</title>
+    <meta name="description" content="Elimina la papada sin cirugía. Tratamiento MiniLipopapada con el Dr. Rodrigo Olivares, Universidad de Chile. Providencia, Santiago.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a3a5c;
+            --navy-light: #2c5282;
+            --sage: #7a9e9f;
+            --sage-light: #a8c5c6;
+            --sage-bg: #f0f5f5;
+            --accent: #c97b63;
+            --accent-bg: #fdf6f4;
+            --text: #2d3748;
+            --text-light: #718096;
+            --whatsapp: #25D366;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; color: var(--navy); }
+
+        .label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--sage);
+            font-weight: 500;
+        }
+        .divider { width: 40px; height: 1px; background: var(--sage); margin: 1.2rem 0; }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(122,158,159,0.12);
+        }
+        .nav-inner {
+            max-width: 1000px; margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+        .nav-logo svg { width: 34px; height: 34px; }
+        .nav-logo span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem; color: var(--navy); font-weight: 500;
+        }
+        .nav-cta {
+            padding: 0.5rem 1.3rem;
+            background: var(--navy); color: #fff !important;
+            text-decoration: none; font-size: 0.7rem; font-weight: 500;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            border-radius: 50px; transition: all 0.3s;
+        }
+        .nav-cta:hover { background: var(--sage); }
+
+        /* HERO */
+        .hero {
+            min-height: 92vh;
+            display: flex; align-items: center;
+            background: linear-gradient(180deg, #fff 0%, var(--sage-bg) 100%);
+            padding: 7rem 1.5rem 4rem;
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -30%; right: -15%;
+            width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(122,158,159,0.1) 0%, transparent 70%);
+        }
+        .hero-grid {
+            max-width: 1000px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr; gap: 3rem;
+            align-items: center; position: relative; z-index: 1;
+        }
+        .hero h1 { font-size: 2.6rem; line-height: 1.15; margin: 1rem 0 0; }
+        .hero h1 em { font-style: italic; color: var(--sage); }
+        .hero p {
+            color: var(--text-light); font-weight: 300;
+            font-size: 0.95rem; margin: 1.2rem 0 2rem; max-width: 420px; line-height: 1.8;
+        }
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2.2rem;
+            background: var(--navy); color: #fff;
+            text-decoration: none; font-size: 0.78rem; font-weight: 500;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            border-radius: 50px; transition: all 0.35s ease;
+            box-shadow: 0 8px 24px rgba(26,58,92,0.15);
+        }
+        .btn-primary:hover { background: var(--navy-light); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(26,58,92,0.2); }
+        .hero-note { font-size: 0.72rem; color: var(--text-light); margin-top: 1rem; letter-spacing: 0.5px; }
+        .hero-note strong { color: var(--accent); font-weight: 500; }
+
+        .hero-img { position: relative; }
+        .hero-img-frame {
+            border-radius: 200px 200px 20px 20px;
+            overflow: hidden;
+            border: 1px solid rgba(122,158,159,0.25);
+            box-shadow: 0 30px 60px rgba(26,58,92,0.12);
+            aspect-ratio: 3/4;
+            background: var(--sage-bg);
+        }
+        .hero-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+        .hero-badge {
+            position: absolute; bottom: 1.5rem; left: -0.5rem;
+            background: #fff; border-radius: 14px;
+            padding: 0.9rem 1.2rem;
+            box-shadow: 0 15px 35px rgba(26,58,92,0.12);
+            border: 1px solid rgba(122,158,159,0.15);
+        }
+        .hero-badge .num { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--navy); font-weight: 600; line-height: 1; }
+        .hero-badge .txt { font-size: 0.65rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* BENEFICIOS */
+        .benefits { padding: 4.5rem 1.5rem; background: #fff; }
+        .benefits-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+        .benefits h2 { font-size: 1.9rem; margin: 0.5rem 0 2.5rem; }
+        .benefits-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+        .benefit-item { padding: 0 1rem; }
+        .benefit-icon {
+            width: 52px; height: 52px; margin: 0 auto 1rem;
+            border-radius: 50%; background: var(--sage-bg);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .benefit-icon svg { width: 22px; height: 22px; stroke: var(--sage); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .benefit-item h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
+        .benefit-item p { font-size: 0.85rem; color: var(--text-light); font-weight: 300; max-width: 260px; margin: 0 auto; }
+
+        /* RESULTADO */
+        .result { padding: 4.5rem 1.5rem; background: var(--sage-bg); }
+        .result-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+        .result h2 { font-size: 1.9rem; margin: 0.5rem 0 2.5rem; }
+        .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 640px; margin: 0 auto; }
+        .result-img {
+            position: relative; border-radius: 16px; overflow: hidden;
+            aspect-ratio: 4/5; background: #e2e8e8;
+            border: 1px solid rgba(122,158,159,0.2);
+        }
+        .result-img img { width: 100%; height: 100%; object-fit: cover; }
+        .result-tag {
+            position: absolute; top: 0.8rem; left: 0.8rem;
+            padding: 0.3rem 0.9rem; border-radius: 50px;
+            font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+        }
+        .result-tag.before { background: rgba(255,255,255,0.9); color: var(--navy); }
+        .result-tag.after { background: var(--navy); color: #fff; }
+        .result-caption { margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-light); font-weight: 300; font-style: italic; }
+
+        /* CTA FINAL */
+        .cta { padding: 5rem 1.5rem; background: var(--navy); text-align: center; }
+        .cta .label { color: var(--sage-light); }
+        .cta h2 { color: #fff; font-size: 2.2rem; margin: 0.8rem auto 1rem; max-width: 500px; line-height: 1.2; }
+        .cta h2 em { font-style: italic; color: var(--sage-light); }
+        .cta p { color: rgba(255,255,255,0.6); font-size: 0.9rem; font-weight: 300; margin-bottom: 2rem; }
+        .btn-accent {
+            display: inline-block;
+            padding: 1.1rem 2.5rem;
+            background: var(--accent); color: #fff;
+            text-decoration: none; font-size: 0.78rem; font-weight: 500;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            border-radius: 50px; transition: all 0.35s;
+            box-shadow: 0 8px 24px rgba(201,123,99,0.3);
+        }
+        .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(201,123,99,0.4); }
+        .cta-info { margin-top: 2.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.55); font-weight: 300; letter-spacing: 0.5px; }
+        .cta-info a { color: var(--sage-light); text-decoration: none; }
+
+        /* FOOTER */
+        footer { background: #142e4a; color: rgba(255,255,255,0.4); text-align: center; padding: 1.5rem; font-size: 0.7rem; letter-spacing: 0.5px; }
+
+        /* FAB */
+        .fab-wa {
+            position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 90;
+            width: 54px; height: 54px; border-radius: 50%;
+            background: var(--whatsapp);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        .fab-wa:hover { transform: scale(1.1); }
+        .fab-wa svg { width: 26px; height: 26px; fill: #fff; }
+        .fab-wa::after {
+            content: ''; position: absolute; inset: -4px; border-radius: 50%;
+            border: 2px solid var(--whatsapp);
+            animation: pulse 2s ease-out infinite;
+        }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.5); opacity: 0; } }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(24px); transition: all 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (min-width: 768px) {
+            .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; }
+            .hero h1 { font-size: 3.4rem; }
+            .benefits-grid { grid-template-columns: repeat(3, 1fr); }
+            .result-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <svg viewBox="0 0 120 120" fill="none">
+                    <circle cx="60" cy="60" r="55" stroke="#7a9e9f" stroke-width="1.5"/>
+                    <text x="28" y="72" font-family="Cormorant Garamond, serif" font-size="42" fill="#1a3a5c" font-weight="500">R</text>
+                    <text x="62" y="72" font-family="Cormorant Garamond, serif" font-size="42" fill="#7a9e9f">O</text>
+                </svg>
+                <span>Dr. Rodrigo Olivares</span>
+            </a>
+            <a href="https://wa.me/56956620576?text=Hola%20Dr.%20Olivares%2C%20quiero%20agendar%20mi%20evaluaci%C3%B3n%20para%20MiniLipopapada" class="nav-cta">Agendar</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-grid">
+            <div class="reveal">
+                <span class="label">Armonización Orofacial · Universidad de Chile</span>
+                <h1>El contorno que tu rostro <em>merece.</em></h1>
+                <div class="divider"></div>
+                <p>MiniLipopapada: tratamiento de precisión para eliminar la grasa bajo el mentón. Sin cirugía, sin reposo y con resultados naturales.</p>
+                <a href="https://wa.me/56956620576?text=Hola%20Dr.%20Olivares%2C%20vi%20el%20correo%20sobre%20MiniLipopapada%20y%20quiero%20agendar%20mi%20evaluaci%C3%B3n" class="btn-primary">Agendar evaluación gratuita</a>
+                <p class="hero-note">Cupos limitados · <strong>Atención en Av. Providencia 1208</strong></p>
+            </div>
+            <div class="hero-img reveal">
+                <div class="hero-img-frame">
+                    <!-- 👉 REEMPLAZAR por la foto del doctor que me compartiste (dr-olivares.jpg) -->
+                    <img src="dr-olivares.jpg" alt="Dr. Rodrigo Olivares">
+                </div>
+                <div class="hero-badge">
+                    <div class="num">+3.000</div>
+                    <div class="txt">Pacientes atendidos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section class="benefits">
+        <div class="benefits-inner">
+            <span class="label">El tratamiento</span>
+            <h2>Sencillo, preciso, elegante</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item reveal">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3>30 minutos</h3>
+                    <p>Una sola sesión en consulta ambulatoria, sin quirófano ni anestesia general.</p>
+                </div>
+                <div class="benefit-item reveal">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                    </div>
+                    <h3>Recuperación 24h</h3>
+                    <p>Retoma tu vida laboral y social al día siguiente, sin moretones visibles.</p>
+                </div>
+                <div class="benefit-item reveal">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Resultados naturales</h3>
+                    <p>Perfil armonioso que respeta tu identidad. Nadie sabrá, solo notarán.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTADO -->
+    <section class="result">
+        <div class="result-inner">
+            <span class="label">Resultado real</span>
+            <h2>Una sesión. Una diferencia.</h2>
+            <div class="result-grid">
+                <div class="result-img reveal">
+                    <img src="antes.jpg" alt="Antes">
+                    <span class="result-tag before">Antes</span>
+                </div>
+                <div class="result-img reveal">
+                    <img src="despues.jpg" alt="Después">
+                    <span class="result-tag after">Después</span>
+                </div>
+            </div>
+            <p class="result-caption">Paciente femenina, 38 años · Resultado a 30 días post-tratamiento. Cada caso es evaluado de forma personalizada.</p>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta">
+        <span class="label">Evaluación sin costo</span>
+        <h2>Tu perfil, <em>redefinido.</em></h2>
+        <p>Escríbele al Dr. Olivares y agenda tu evaluación gratuita esta semana.</p>
+        <a href="https://wa.me/56956620576?text=Hola%20Dr.%20Olivares%2C%20vi%20el%20correo%20sobre%20MiniLipopapada%20y%20quiero%20agendar%20mi%20evaluaci%C3%B3n" class="btn-accent">Agendar por WhatsApp</a>
+        <p class="cta-info">
+            Av. Providencia 1208, Santiago · <a href="tel:+56956620576">+56 9 5662 0576</a> · <a href="https://instagram.com/rolivaresdoctor">@rolivaresdoctor</a>
+        </p>
+    </section>
+
+    <footer>© 2026 Dr. Rodrigo Olivares · Cirujano Dentista · Especialista en Armonización Orofacial</footer>
+
+    <!-- FAB WHATSAPP -->
+    <a href="https://wa.me/56956620576?text=Hola%20Dr.%20Olivares%2C%20quiero%20info%20sobre%20MiniLipopapada" class="fab-wa" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
