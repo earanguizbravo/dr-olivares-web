@@ -65,6 +65,7 @@
             text-decoration: none; font-size: 0.7rem; font-weight: 500;
             letter-spacing: 1.5px; text-transform: uppercase;
             border-radius: 50px; transition: all 0.3s;
+            cursor: pointer; border: none; font-family: 'Inter', sans-serif;
         }
         .nav-cta:hover { background: var(--sage); }
 
@@ -100,6 +101,7 @@
             letter-spacing: 1.5px; text-transform: uppercase;
             border-radius: 50px; transition: all 0.35s ease;
             box-shadow: 0 8px 24px rgba(26,58,92,0.15);
+            cursor: pointer; border: none; font-family: 'Inter', sans-serif;
         }
         .btn-primary:hover { background: var(--navy-light); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(26,58,92,0.2); }
         .hero-note { font-size: 0.72rem; color: var(--text-light); margin-top: 1rem; letter-spacing: 0.5px; }
@@ -174,6 +176,7 @@
             letter-spacing: 1.5px; text-transform: uppercase;
             border-radius: 50px; transition: all 0.35s;
             box-shadow: 0 8px 24px rgba(201,123,99,0.3);
+            cursor: pointer; border: none; font-family: 'Inter', sans-serif;
         }
         .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(201,123,99,0.4); }
         .cta-info { margin-top: 2.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.55); font-weight: 300; letter-spacing: 0.5px; }
@@ -190,6 +193,7 @@
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 6px 20px rgba(0,0,0,0.2);
             transition: transform 0.3s;
+            text-decoration: none;
         }
         .fab-wa:hover { transform: scale(1.1); }
         .fab-wa svg { width: 26px; height: 26px; fill: #fff; }
@@ -203,6 +207,259 @@
         /* REVEAL */
         .reveal { opacity: 0; transform: translateY(24px); transition: all 0.8s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============================================ */
+        /* MODAL DE EVALUACIÓN (NUEVO)                  */
+        /* ============================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(26,58,92,0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .modal {
+            background: #fff;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 520px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+        }
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: var(--sage-bg);
+            border: none;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.3s;
+            z-index: 2;
+        }
+        .modal-close:hover { background: var(--sage-light); }
+        .modal-close svg { width: 18px; height: 18px; stroke: var(--navy); stroke-width: 2; }
+
+        .modal-header {
+            padding: 2rem 1.5rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(122,158,159,0.15);
+        }
+        .modal-header .label { margin-bottom: 0.5rem; display: block; }
+        .modal-header h3 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+        .modal-header p { font-size: 0.82rem; color: var(--text-light); font-weight: 300; }
+
+        /* Progress bar */
+        .progress-bar {
+            display: flex;
+            gap: 0.4rem;
+            padding: 1rem 1.5rem 0.5rem;
+        }
+        .progress-step {
+            flex: 1;
+            height: 3px;
+            background: var(--sage-bg);
+            border-radius: 3px;
+            transition: background 0.4s ease;
+        }
+        .progress-step.active { background: var(--sage); }
+        .progress-step.done { background: var(--navy); }
+
+        .modal-body { padding: 1.5rem; }
+
+        .step { display: none; animation: fadeStep 0.4s ease; }
+        .step.active { display: block; }
+        @keyframes fadeStep {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .question { margin-bottom: 1.5rem; }
+        .question-label {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--navy);
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+        .question-number {
+            display: inline-block;
+            width: 22px; height: 22px;
+            background: var(--sage);
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 22px;
+            font-size: 0.7rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .options { display: flex; flex-direction: column; gap: 0.5rem; }
+        .option {
+            position: relative;
+        }
+        .option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .option label {
+            display: block;
+            padding: 0.85rem 1rem;
+            background: var(--sage-bg);
+            border: 1.5px solid transparent;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-weight: 400;
+        }
+        .option label:hover { background: #e6eeef; }
+        .option input:checked + label {
+            background: #fff;
+            border-color: var(--navy);
+            color: var(--navy);
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(26,58,92,0.08);
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1.5px solid rgba(122,158,159,0.3);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text);
+            background: var(--sage-bg);
+            transition: border-color 0.3s, background 0.3s;
+            outline: none;
+        }
+        .text-input:focus {
+            border-color: var(--sage);
+            background: #fff;
+        }
+        .text-input::placeholder { color: var(--text-light); }
+
+        .consent-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            padding: 1rem;
+            background: var(--accent-bg);
+            border-radius: 10px;
+            border: 1px solid rgba(201,123,99,0.2);
+            margin-top: 1rem;
+        }
+        .consent-box input[type="checkbox"] {
+            width: 18px; height: 18px;
+            accent-color: var(--accent);
+            margin-top: 2px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        .consent-box label {
+            font-size: 0.78rem;
+            color: var(--text);
+            line-height: 1.5;
+            cursor: pointer;
+        }
+        .consent-box label strong { color: var(--navy); }
+
+        .modal-footer {
+            padding: 1rem 1.5rem 1.5rem;
+            display: flex;
+            gap: 0.7rem;
+        }
+        .btn-back {
+            flex: 0 0 auto;
+            padding: 0.9rem 1.3rem;
+            background: transparent;
+            border: 1.5px solid rgba(122,158,159,0.3);
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-back:hover { border-color: var(--sage); color: var(--navy); }
+        .btn-next {
+            flex: 1;
+            padding: 0.9rem 1.5rem;
+            background: var(--navy);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-next:hover { background: var(--navy-light); }
+        .btn-next:disabled {
+            background: var(--sage-light);
+            cursor: not-allowed;
+        }
+        .btn-whatsapp {
+            flex: 1;
+            padding: 0.9rem 1.5rem;
+            background: var(--whatsapp);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .btn-whatsapp:hover { background: #1ebe57; }
+        .btn-whatsapp svg { width: 16px; height: 16px; fill: #fff; }
+
+        .error-msg {
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-top: 0.4rem;
+            display: none;
+        }
+        .error-msg.show { display: block; }
 
         @media (min-width: 768px) {
             .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; }
@@ -225,7 +482,7 @@
                 </svg>
                 <span>Dr. Rodrigo Olivares</span>
             </a>
-            <a href="https://wa.me/56956620576?text=Hola%20Dr.%20Olivares%2C%20quiero%20agendar%20mi%20evaluaci%C3%B3n%20para%20MiniLipopapada" class="nav-cta">Agendar</a>
+            <button class="nav-cta open-modal">Agendar</button>
         </div>
     </nav>
 
@@ -237,12 +494,11 @@
                 <h1>El contorno que tu rostro <em>merece.</em></h1>
                 <div class="divider"></div>
                 <p>MiniLipopapada: tratamiento de precisión para eliminar la grasa bajo el mentón. Sin cirugía, sin reposo y con resultados naturales.</p>
-                <a href="https://wa.me/56956620576?text=Hola%20Dr.%20Olivares%2C%20vi%20el%20correo%20sobre%20MiniLipopapada%20y%20quiero%20agendar%20mi%20evaluaci%C3%B3n" class="btn-primary">Agendar evaluación gratuita</a>
+                <button class="btn-primary open-modal">Agendar evaluación gratuita</button>
                 <p class="hero-note">Cupos limitados · <strong>Atención en Av. Providencia 1208</strong></p>
             </div>
             <div class="hero-img reveal">
                 <div class="hero-img-frame">
-                    <!-- 👉 REEMPLAZAR por la foto del doctor que me compartiste (dr-olivares.jpg) -->
                     <img src="dr-olivares.jpg" alt="Dr. Rodrigo Olivares">
                 </div>
                 <div class="hero-badge">
@@ -307,8 +563,8 @@
     <section class="cta">
         <span class="label">Evaluación sin costo</span>
         <h2>Tu perfil, <em>redefinido.</em></h2>
-        <p>Escríbele al Dr. Olivares y agenda tu evaluación gratuita esta semana.</p>
-        <a href="https://wa.me/56956620576?text=Hola%20Dr.%20Olivares%2C%20vi%20el%20correo%20sobre%20MiniLipopapada%20y%20quiero%20agendar%20mi%20evaluaci%C3%B3n" class="btn-accent">Agendar por WhatsApp</a>
+        <p>Completa la evaluación preliminar y agenda tu cita con el Dr. Olivares.</p>
+        <button class="btn-accent open-modal">Iniciar evaluación</button>
         <p class="cta-info">
             Av. Providencia 1208, Santiago · <a href="tel:+56956620576">+56 9 5662 0576</a> · <a href="https://instagram.com/rolivaresdoctor">@rolivaresdoctor</a>
         </p>
@@ -316,16 +572,315 @@
 
     <footer>© 2026 Dr. Rodrigo Olivares · Cirujano Dentista · Especialista en Armonización Orofacial</footer>
 
-    <!-- FAB WHATSAPP -->
+    <!-- FAB WHATSAPP (directo, sin formulario) -->
     <a href="https://wa.me/56956620576?text=Hola%20Dr.%20Olivares%2C%20quiero%20info%20sobre%20MiniLipopapada" class="fab-wa" aria-label="WhatsApp">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
 
+    <!-- ============================================ -->
+    <!-- MODAL DE EVALUACIÓN PRELIMINAR               -->
+    <!-- ============================================ -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" role="dialog" aria-modal="true">
+            <button class="modal-close" id="modalClose" aria-label="Cerrar">
+                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+            </button>
+
+            <div class="modal-header">
+                <span class="label">Evaluación Preliminar</span>
+                <h3>MiniLipopapada</h3>
+                <p>Completa estos datos para agendar tu evaluación con el Dr. Olivares</p>
+            </div>
+
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-step active" data-step="1"></div>
+                <div class="progress-step" data-step="2"></div>
+                <div class="progress-step" data-step="3"></div>
+                <div class="progress-step" data-step="4"></div>
+            </div>
+
+            <form id="evalForm" class="modal-body">
+
+                <!-- PASO 1: Objetivo + Descripción + Edad -->
+                <div class="step active" data-step="1">
+                    <div class="question">
+                        <label class="question-label"><span class="question-number">1</span>¿Qué es lo que más te gustaría mejorar?</label>
+                        <div class="options">
+                            <div class="option"><input type="radio" name="objetivo" id="obj1" value="Eliminar grasa de la papada" required><label for="obj1">Eliminar grasa de la papada</label></div>
+                            <div class="option"><input type="radio" name="objetivo" id="obj2" value="Definir el contorno mandibular"><label for="obj2">Definir el contorno mandibular</label></div>
+                            <div class="option"><input type="radio" name="objetivo" id="obj3" value="Reducir flacidez del cuello"><label for="obj3">Reducir flacidez del cuello</label></div>
+                            <div class="option"><input type="radio" name="objetivo" id="obj4" value="Mejorar mi perfil facial"><label for="obj4">Mejorar mi perfil facial</label></div>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label class="question-label"><span class="question-number">2</span>¿Cómo describirías tu papada?</label>
+                        <div class="options">
+                            <div class="option"><input type="radio" name="papada" id="pap1" value="Leve" required><label for="pap1">Leve</label></div>
+                            <div class="option"><input type="radio" name="papada" id="pap2" value="Moderada"><label for="pap2">Moderada</label></div>
+                            <div class="option"><input type="radio" name="papada" id="pap3" value="Pronunciada"><label for="pap3">Pronunciada</label></div>
+                            <div class="option"><input type="radio" name="papada" id="pap4" value="No estoy seguro/a"><label for="pap4">No estoy seguro/a</label></div>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label class="question-label"><span class="question-number">3</span>¿Cuál es tu edad?</label>
+                        <div class="options">
+                            <div class="option"><input type="radio" name="edad" id="ed1" value="Menos de 18 años" required><label for="ed1">Menos de 18 años</label></div>
+                            <div class="option"><input type="radio" name="edad" id="ed2" value="18 a 29 años"><label for="ed2">18 a 29 años</label></div>
+                            <div class="option"><input type="radio" name="edad" id="ed3" value="30 a 45 años"><label for="ed3">30 a 45 años</label></div>
+                            <div class="option"><input type="radio" name="edad" id="ed4" value="46 a 60 años"><label for="ed4">46 a 60 años</label></div>
+                            <div class="option"><input type="radio" name="edad" id="ed5" value="Más de 60 años"><label for="ed5">Más de 60 años</label></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PASO 2: Historial médico -->
+                <div class="step" data-step="2">
+                    <div class="question">
+                        <label class="question-label"><span class="question-number">4</span>¿Te has realizado anteriormente algún procedimiento en la papada?</label>
+                        <div class="options">
+                            <div class="option"><input type="radio" name="previo" id="prev1" value="No, ninguno" required><label for="prev1">No, ninguno</label></div>
+                            <div class="option"><input type="radio" name="previo" id="prev2" value="Sí, tratamientos estéticos"><label for="prev2">Sí, tratamientos estéticos</label></div>
+                            <div class="option"><input type="radio" name="previo" id="prev3" value="Sí, cirugía o liposucción"><label for="prev3">Sí, cirugía o liposucción</label></div>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label class="question-label"><span class="question-number">5</span>¿Tienes alguna enfermedad o condición médica relevante?</label>
+                        <div class="options">
+                            <div class="option"><input type="radio" name="enfermedad" id="enf1" value="No" required><label for="enf1">No</label></div>
+                            <div class="option"><input type="radio" name="enfermedad" id="enf2" value="Sí"><label for="enf2">Sí</label></div>
+                            <div class="option"><input type="radio" name="enfermedad" id="enf3" value="No estoy seguro/a"><label for="enf3">No estoy seguro/a</label></div>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label class="question-label"><span class="question-number">6</span>¿Tomas medicamentos habitualmente?</label>
+                        <div class="options">
+                            <div class="option"><input type="radio" name="medicamentos" id="med1" value="No" required><label for="med1">No</label></div>
+                            <div class="option"><input type="radio" name="medicamentos" id="med2" value="Sí, anticoagulantes o que afectan la coagulación"><label for="med2">Sí, anticoagulantes o que afectan la coagulación</label></div>
+                            <div class="option"><input type="radio" name="medicamentos" id="med3" value="Sí, otros medicamentos"><label for="med3">Sí, otros medicamentos</label></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PASO 3: Embarazo + Timing -->
+                <div class="step" data-step="3">
+                    <div class="question">
+                        <label class="question-label"><span class="question-number">7</span>¿Estás embarazada o en período de lactancia?</label>
+                        <div class="options">
+                            <div class="option"><input type="radio" name="embarazo" id="emb1" value="No" required><label for="emb1">No</label></div>
+                            <div class="option"><input type="radio" name="embarazo" id="emb2" value="Sí"><label for="emb2">Sí</label></div>
+                            <div class="option"><input type="radio" name="embarazo" id="emb3" value="No corresponde"><label for="emb3">No corresponde</label></div>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label class="question-label"><span class="question-number">8</span>¿Cuándo te gustaría realizarte el procedimiento?</label>
+                        <div class="options">
+                            <div class="option"><input type="radio" name="timing" id="tim1" value="Lo antes posible" required><label for="tim1">Lo antes posible</label></div>
+                            <div class="option"><input type="radio" name="timing" id="tim2" value="Durante el próximo mes"><label for="tim2">Durante el próximo mes</label></div>
+                            <div class="option"><input type="radio" name="timing" id="tim3" value="En los próximos 3 meses"><label for="tim3">En los próximos 3 meses</label></div>
+                            <div class="option"><input type="radio" name="timing" id="tim4" value="Solo estoy cotizando"><label for="tim4">Solo estoy cotizando</label></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PASO 4: Datos + Consentimiento -->
+                <div class="step" data-step="4">
+                    <div class="question">
+                        <label class="question-label" for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" class="text-input" placeholder="Tu nombre y apellido" required>
+                        <div class="error-msg" id="errNombre">Por favor ingresa tu nombre completo</div>
+                    </div>
+                    <div class="question">
+                        <label class="question-label" for="whatsapp">Número de WhatsApp</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" class="text-input" placeholder="+56 9 1234 5678" required>
+                        <div class="error-msg" id="errWhats">Ingresa un número válido (mínimo 9 dígitos)</div>
+                    </div>
+                    <div class="consent-box">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent">
+                            <strong>Consentimiento informado:</strong> Autorizo el tratamiento de mis datos personales y sensibles de salud conforme a la <strong>Ley 19.628</strong> sobre Protección de la Vida Privada, para ser contactado por el Dr. Rodrigo Olivares respecto a esta evaluación.
+                        </label>
+                    </div>
+                    <div class="error-msg" id="errConsent" style="margin-top:0.5rem;">Debes aceptar el consentimiento para continuar</div>
+                </div>
+
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-back" id="btnBack" style="display:none;">Atrás</button>
+                <button type="button" class="btn-next" id="btnNext">Siguiente</button>
+                <button type="button" class="btn-whatsapp" id="btnSend" style="display:none;">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Enviar por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Reveal on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.15 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ============================================
+        // LÓGICA DEL MODAL DE EVALUACIÓN
+        // ============================================
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalClose = document.getElementById('modalClose');
+        const btnBack = document.getElementById('btnBack');
+        const btnNext = document.getElementById('btnNext');
+        const btnSend = document.getElementById('btnSend');
+        const progressSteps = document.querySelectorAll('.progress-step');
+        const steps = document.querySelectorAll('.step');
+        const totalSteps = steps.length;
+        let currentStep = 1;
+
+        // Abrir modal
+        document.querySelectorAll('.open-modal').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Cerrar modal
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        // Actualizar UI según paso
+        function updateStep() {
+            steps.forEach(s => s.classList.remove('active'));
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+
+            progressSteps.forEach((ps, i) => {
+                const stepNum = i + 1;
+                ps.classList.remove('active', 'done');
+                if (stepNum < currentStep) ps.classList.add('done');
+                else if (stepNum === currentStep) ps.classList.add('active');
+            });
+
+            btnBack.style.display = currentStep === 1 ? 'none' : 'block';
+            btnNext.style.display = currentStep === totalSteps ? 'none' : 'block';
+            btnSend.style.display = currentStep === totalSteps ? 'flex' : 'none';
+
+            // Scroll al inicio del modal
+            document.querySelector('.modal').scrollTop = 0;
+        }
+
+        // Validar paso actual
+        function validateStep(step) {
+            const stepEl = document.querySelector(`.step[data-step="${step}"]`);
+            const radios = stepEl.querySelectorAll('input[type="radio"][required]');
+            for (const radio of radios) {
+                const groupName = radio.name;
+                const checked = stepEl.querySelector(`input[name="${groupName}"]:checked`);
+                if (!checked) return false;
+            }
+
+            if (step === 4) {
+                const nombre = document.getElementById('nombre').value.trim();
+                const whatsapp = document.getElementById('whatsapp').value.trim();
+                const consent = document.getElementById('consent').checked;
+
+                let valid = true;
+                if (nombre.length < 3) {
+                    document.getElementById('errNombre').classList.add('show');
+                    valid = false;
+                } else {
+                    document.getElementById('errNombre').classList.remove('show');
+                }
+
+                const digits = whatsapp.replace(/\D/g, '');
+                if (digits.length < 9) {
+                    document.getElementById('errWhats').classList.add('show');
+                    valid = false;
+                } else {
+                    document.getElementById('errWhats').classList.remove('show');
+                }
+
+                if (!consent) {
+                    document.getElementById('errConsent').classList.add('show');
+                    valid = false;
+                } else {
+                    document.getElementById('errConsent').classList.remove('show');
+                }
+
+                return valid;
+            }
+            return true;
+        }
+
+        // Siguiente
+        btnNext.addEventListener('click', () => {
+            if (validateStep(currentStep) && currentStep < totalSteps) {
+                currentStep++;
+                updateStep();
+            }
+        });
+
+        // Atrás
+        btnBack.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStep();
+            }
+        });
+
+        // Enviar a WhatsApp
+        btnSend.addEventListener('click', () => {
+            if (!validateStep(4)) return;
+
+            const getVal = (name) => {
+                const el = document.querySelector(`input[name="${name}"]:checked`);
+                return el ? el.value : '-';
+            };
+
+            const nombre = document.getElementById('nombre').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
+
+            const mensaje = `Hola Dr. Olivares, completé la evaluación preliminar para MiniLipopapada:%0A%0A` +
+                `📋 *EVALUACIÓN:*%0A` +
+                `• Objetivo: ${encodeURIComponent(getVal('objetivo'))}%0A` +
+                `• Papada: ${encodeURIComponent(getVal('papada'))}%0A` +
+                `• Edad: ${encodeURIComponent(getVal('edad'))}%0A` +
+                `• Procedimientos previos: ${encodeURIComponent(getVal('previo'))}%0A` +
+                `• Condición médica: ${encodeURIComponent(getVal('enfermedad'))}%0A` +
+                `• Medicamentos: ${encodeURIComponent(getVal('medicamentos'))}%0A` +
+                `• Embarazo/lactancia: ${encodeURIComponent(getVal('embarazo'))}%0A` +
+                `• Timing: ${encodeURIComponent(getVal('timing'))}%0A%0A` +
+                `👤 *DATOS DE CONTACTO:*%0A` +
+                `• Nombre: ${encodeURIComponent(nombre)}%0A` +
+                `• WhatsApp: ${encodeURIComponent(whatsapp)}%0A%0A` +
+                `✅ Consiento tratamiento de datos (Ley 19.628)`;
+
+            const url = `https://wa.me/56956620576?text=${mensaje}`;
+            window.open(url, '_blank');
+            closeModal();
+        });
+
+        // Limpiar errores al escribir
+        document.getElementById('nombre').addEventListener('input', () => {
+            document.getElementById('errNombre').classList.remove('show');
+        });
+        document.getElementById('whatsapp').addEventListener('input', () => {
+            document.getElementById('errWhats').classList.remove('show');
+        });
+        document.getElementById('consent').addEventListener('change', () => {
+            document.getElementById('errConsent').classList.remove('show');
+        });
+
+        // Cerrar con ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
+        });
     </script>
 </body>
 </html>
