@@ -142,6 +142,51 @@
         .benefit-item h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
         .benefit-item p { font-size: 0.85rem; color: var(--text-light); font-weight: 300; max-width: 260px; margin: 0 auto; }
 
+        /* ===== SECCIÓN REEL ===== */
+        .reel-section { padding: 5rem 1.5rem; background: var(--navy); }
+        .reel-inner {
+            max-width: 1000px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center;
+        }
+        .reel-section .label { color: var(--sage-light); }
+        .reel-section h2 { color: #fff; font-size: 2rem; margin: 0.5rem 0; }
+        .reel-section h2 em { font-style: italic; color: var(--sage-light); }
+        .reel-section .reel-text p { color: rgba(255,255,255,0.65); font-size: 0.9rem; font-weight: 300; line-height: 1.8; }
+        .reel-meta { margin-top: 1.2rem; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--sage-light); }
+
+        .reel-wrap { display: flex; justify-content: center; order: -1; }
+        .reel-frame {
+            position: relative; width: 100%; max-width: 300px;
+            aspect-ratio: 9 / 16; border-radius: 24px; overflow: hidden;
+            border: 1px solid rgba(168,197,198,0.25);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+            background: #000;
+        }
+        .reel-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .reel-play {
+            position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.55));
+            cursor: pointer; transition: opacity 0.4s ease;
+        }
+        .reel-play-btn {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: rgba(255,255,255,0.95);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35); transition: transform 0.3s;
+        }
+        .reel-play:hover .reel-play-btn { transform: scale(1.1); }
+        .reel-play-btn svg { width: 22px; height: 22px; fill: var(--navy); margin-left: 3px; }
+        .reel-play.hidden { opacity: 0; pointer-events: none; }
+
+        .reel-corner {
+            position: absolute; top: 0.9rem; left: 0.9rem;
+            padding: 0.3rem 0.8rem; border-radius: 50px;
+            background: rgba(0,0,0,0.45); backdrop-filter: blur(6px);
+            font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
+            color: #fff; font-weight: 500; z-index: 2;
+        }
+
         /* RESULTADO */
         .result { padding: 4.5rem 1.5rem; background: var(--sage-bg); }
         .result-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
@@ -209,7 +254,7 @@
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
         /* ============================================ */
-        /* MODAL DE EVALUACIÓN (NUEVO)                  */
+        /* MODAL DE EVALUACIÓN                          */
         /* ============================================ */
         .modal-overlay {
             position: fixed;
@@ -268,7 +313,6 @@
         .modal-header h3 { font-size: 1.6rem; margin-bottom: 0.5rem; }
         .modal-header p { font-size: 0.82rem; color: var(--text-light); font-weight: 300; }
 
-        /* Progress bar */
         .progress-bar {
             display: flex;
             gap: 0.4rem;
@@ -318,14 +362,8 @@
         }
 
         .options { display: flex; flex-direction: column; gap: 0.5rem; }
-        .option {
-            position: relative;
-        }
-        .option input {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
+        .option { position: relative; }
+        .option input { position: absolute; opacity: 0; pointer-events: none; }
         .option label {
             display: block;
             padding: 0.85rem 1rem;
@@ -359,16 +397,11 @@
             transition: border-color 0.3s, background 0.3s;
             outline: none;
         }
-        .text-input:focus {
-            border-color: var(--sage);
-            background: #fff;
-        }
+        .text-input:focus { border-color: var(--sage); background: #fff; }
         .text-input::placeholder { color: var(--text-light); }
 
         .consent-box {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.7rem;
+            display: flex; align-items: flex-start; gap: 0.7rem;
             padding: 1rem;
             background: var(--accent-bg);
             border-radius: 10px;
@@ -378,23 +411,12 @@
         .consent-box input[type="checkbox"] {
             width: 18px; height: 18px;
             accent-color: var(--accent);
-            margin-top: 2px;
-            flex-shrink: 0;
-            cursor: pointer;
+            margin-top: 2px; flex-shrink: 0; cursor: pointer;
         }
-        .consent-box label {
-            font-size: 0.78rem;
-            color: var(--text);
-            line-height: 1.5;
-            cursor: pointer;
-        }
+        .consent-box label { font-size: 0.78rem; color: var(--text); line-height: 1.5; cursor: pointer; }
         .consent-box label strong { color: var(--navy); }
 
-        .modal-footer {
-            padding: 1rem 1.5rem 1.5rem;
-            display: flex;
-            gap: 0.7rem;
-        }
+        .modal-footer { padding: 1rem 1.5rem 1.5rem; display: flex; gap: 0.7rem; }
         .btn-back {
             flex: 0 0 auto;
             padding: 0.9rem 1.3rem;
@@ -402,63 +424,37 @@
             border: 1.5px solid rgba(122,158,159,0.3);
             border-radius: 50px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: all 0.3s;
+            font-size: 0.75rem; font-weight: 500;
+            letter-spacing: 1px; text-transform: uppercase;
+            color: var(--text-light); cursor: pointer; transition: all 0.3s;
         }
         .btn-back:hover { border-color: var(--sage); color: var(--navy); }
         .btn-next {
             flex: 1;
             padding: 0.9rem 1.5rem;
-            background: var(--navy);
-            color: #fff;
-            border: none;
+            background: var(--navy); color: #fff; border: none;
             border-radius: 50px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
+            font-size: 0.75rem; font-weight: 500;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s;
         }
         .btn-next:hover { background: var(--navy-light); }
-        .btn-next:disabled {
-            background: var(--sage-light);
-            cursor: not-allowed;
-        }
         .btn-whatsapp {
             flex: 1;
             padding: 0.9rem 1.5rem;
-            background: var(--whatsapp);
-            color: #fff;
-            border: none;
+            background: var(--whatsapp); color: #fff; border: none;
             border-radius: 50px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            font-size: 0.75rem; font-weight: 500;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
         }
         .btn-whatsapp:hover { background: #1ebe57; }
         .btn-whatsapp svg { width: 16px; height: 16px; fill: #fff; }
 
-        .error-msg {
-            font-size: 0.75rem;
-            color: var(--accent);
-            margin-top: 0.4rem;
-            display: none;
-        }
+        .error-msg { font-size: 0.75rem; color: var(--accent); margin-top: 0.4rem; display: none; }
         .error-msg.show { display: block; }
 
         @media (min-width: 768px) {
@@ -466,6 +462,10 @@
             .hero h1 { font-size: 3.4rem; }
             .benefits-grid { grid-template-columns: repeat(3, 1fr); }
             .result-grid { grid-template-columns: 1fr 1fr; }
+            .reel-inner { grid-template-columns: 0.95fr 1.05fr; gap: 4rem; }
+            .reel-wrap { order: 0; }
+            .reel-frame { max-width: 340px; }
+            .reel-section h2 { font-size: 2.4rem; }
         }
     </style>
 </head>
@@ -540,6 +540,32 @@
         </div>
     </section>
 
+    <!-- REEL -->
+    <section class="reel-section">
+        <div class="reel-inner">
+            <div class="reel-text reveal">
+                <span class="label">Mira el resultado</span>
+                <h2>20 segundos que <em>hablan por sí solos.</em></h2>
+                <div class="divider" style="background: var(--sage-light); margin-left: 0;"></div>
+                <p>Así se ve una transformación real con MiniLipopapada. Sin filtros, sin maquillaje, sin edición.</p>
+                <p class="reel-meta">Reel · 0:22 · Dr. Rodrigo Olivares</p>
+            </div>
+            <div class="reel-wrap reveal">
+                <div class="reel-frame" id="reelFrame">
+                    <span class="reel-corner">▶ Reel</span>
+                    <video id="reelVideo" poster="reel-poster.jpg" playsinline preload="none" disablepictureinpicture controlslist="nodownload">
+                        <source src="reel-minilipopapada.mp4" type="video/mp4">
+                    </video>
+                    <div class="reel-play" id="reelPlay" role="button" aria-label="Reproducir reel">
+                        <div class="reel-play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- RESULTADO -->
     <section class="result">
         <div class="result-inner">
@@ -572,14 +598,12 @@
 
     <footer>© 2026 Dr. Rodrigo Olivares · Cirujano Dentista · Especialista en Armonización Orofacial</footer>
 
-    <!-- FAB WHATSAPP (directo, sin formulario) -->
+    <!-- FAB WHATSAPP -->
     <a href="https://wa.me/56956620576?text=Hola%20Dr.%20Olivares%2C%20quiero%20info%20sobre%20MiniLipopapada" class="fab-wa" aria-label="WhatsApp">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
 
-    <!-- ============================================ -->
-    <!-- MODAL DE EVALUACIÓN PRELIMINAR               -->
-    <!-- ============================================ -->
+    <!-- MODAL DE EVALUACIÓN PRELIMINAR -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" role="dialog" aria-modal="true">
             <button class="modal-close" id="modalClose" aria-label="Cerrar">
@@ -601,7 +625,7 @@
 
             <form id="evalForm" class="modal-body">
 
-                <!-- PASO 1: Objetivo + Descripción + Edad -->
+                <!-- PASO 1 -->
                 <div class="step active" data-step="1">
                     <div class="question">
                         <label class="question-label"><span class="question-number">1</span>¿Qué es lo que más te gustaría mejorar?</label>
@@ -633,7 +657,7 @@
                     </div>
                 </div>
 
-                <!-- PASO 2: Historial médico -->
+                <!-- PASO 2 -->
                 <div class="step" data-step="2">
                     <div class="question">
                         <label class="question-label"><span class="question-number">4</span>¿Te has realizado anteriormente algún procedimiento en la papada?</label>
@@ -661,7 +685,7 @@
                     </div>
                 </div>
 
-                <!-- PASO 3: Embarazo + Timing -->
+                <!-- PASO 3 -->
                 <div class="step" data-step="3">
                     <div class="question">
                         <label class="question-label"><span class="question-number">7</span>¿Estás embarazada o en período de lactancia?</label>
@@ -682,7 +706,7 @@
                     </div>
                 </div>
 
-                <!-- PASO 4: Datos + Consentimiento -->
+                <!-- PASO 4 -->
                 <div class="step" data-step="4">
                     <div class="question">
                         <label class="question-label" for="nombre">Nombre completo</label>
@@ -724,7 +748,7 @@
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // ============================================
-        // LÓGICA DEL MODAL DE EVALUACIÓN
+        // LÓGICA DEL MODAL
         // ============================================
         const modalOverlay = document.getElementById('modalOverlay');
         const modalClose = document.getElementById('modalClose');
@@ -736,7 +760,6 @@
         const totalSteps = steps.length;
         let currentStep = 1;
 
-        // Abrir modal
         document.querySelectorAll('.open-modal').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -745,7 +768,6 @@
             });
         });
 
-        // Cerrar modal
         function closeModal() {
             modalOverlay.classList.remove('active');
             document.body.style.overflow = '';
@@ -755,27 +777,21 @@
             if (e.target === modalOverlay) closeModal();
         });
 
-        // Actualizar UI según paso
         function updateStep() {
             steps.forEach(s => s.classList.remove('active'));
             document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
-
             progressSteps.forEach((ps, i) => {
                 const stepNum = i + 1;
                 ps.classList.remove('active', 'done');
                 if (stepNum < currentStep) ps.classList.add('done');
                 else if (stepNum === currentStep) ps.classList.add('active');
             });
-
             btnBack.style.display = currentStep === 1 ? 'none' : 'block';
             btnNext.style.display = currentStep === totalSteps ? 'none' : 'block';
             btnSend.style.display = currentStep === totalSteps ? 'flex' : 'none';
-
-            // Scroll al inicio del modal
             document.querySelector('.modal').scrollTop = 0;
         }
 
-        // Validar paso actual
         function validateStep(step) {
             const stepEl = document.querySelector(`.step[data-step="${step}"]`);
             const radios = stepEl.querySelectorAll('input[type="radio"][required]');
@@ -784,68 +800,38 @@
                 const checked = stepEl.querySelector(`input[name="${groupName}"]:checked`);
                 if (!checked) return false;
             }
-
             if (step === 4) {
                 const nombre = document.getElementById('nombre').value.trim();
                 const whatsapp = document.getElementById('whatsapp').value.trim();
                 const consent = document.getElementById('consent').checked;
-
                 let valid = true;
-                if (nombre.length < 3) {
-                    document.getElementById('errNombre').classList.add('show');
-                    valid = false;
-                } else {
-                    document.getElementById('errNombre').classList.remove('show');
-                }
-
+                if (nombre.length < 3) { document.getElementById('errNombre').classList.add('show'); valid = false; }
+                else { document.getElementById('errNombre').classList.remove('show'); }
                 const digits = whatsapp.replace(/\D/g, '');
-                if (digits.length < 9) {
-                    document.getElementById('errWhats').classList.add('show');
-                    valid = false;
-                } else {
-                    document.getElementById('errWhats').classList.remove('show');
-                }
-
-                if (!consent) {
-                    document.getElementById('errConsent').classList.add('show');
-                    valid = false;
-                } else {
-                    document.getElementById('errConsent').classList.remove('show');
-                }
-
+                if (digits.length < 9) { document.getElementById('errWhats').classList.add('show'); valid = false; }
+                else { document.getElementById('errWhats').classList.remove('show'); }
+                if (!consent) { document.getElementById('errConsent').classList.add('show'); valid = false; }
+                else { document.getElementById('errConsent').classList.remove('show'); }
                 return valid;
             }
             return true;
         }
 
-        // Siguiente
         btnNext.addEventListener('click', () => {
-            if (validateStep(currentStep) && currentStep < totalSteps) {
-                currentStep++;
-                updateStep();
-            }
+            if (validateStep(currentStep) && currentStep < totalSteps) { currentStep++; updateStep(); }
         });
-
-        // Atrás
         btnBack.addEventListener('click', () => {
-            if (currentStep > 1) {
-                currentStep--;
-                updateStep();
-            }
+            if (currentStep > 1) { currentStep--; updateStep(); }
         });
 
-        // Enviar a WhatsApp
         btnSend.addEventListener('click', () => {
             if (!validateStep(4)) return;
-
             const getVal = (name) => {
                 const el = document.querySelector(`input[name="${name}"]:checked`);
                 return el ? el.value : '-';
             };
-
             const nombre = document.getElementById('nombre').value.trim();
             const whatsapp = document.getElementById('whatsapp').value.trim();
-
             const mensaje = `Hola Dr. Olivares, completé la evaluación preliminar para MiniLipopapada:%0A%0A` +
                 `📋 *EVALUACIÓN:*%0A` +
                 `• Objetivo: ${encodeURIComponent(getVal('objetivo'))}%0A` +
@@ -860,27 +846,30 @@
                 `• Nombre: ${encodeURIComponent(nombre)}%0A` +
                 `• WhatsApp: ${encodeURIComponent(whatsapp)}%0A%0A` +
                 `✅ Consiento tratamiento de datos (Ley 19.628)`;
-
             const url = `https://wa.me/56956620576?text=${mensaje}`;
             window.open(url, '_blank');
             closeModal();
         });
 
-        // Limpiar errores al escribir
-        document.getElementById('nombre').addEventListener('input', () => {
-            document.getElementById('errNombre').classList.remove('show');
-        });
-        document.getElementById('whatsapp').addEventListener('input', () => {
-            document.getElementById('errWhats').classList.remove('show');
-        });
-        document.getElementById('consent').addEventListener('change', () => {
-            document.getElementById('errConsent').classList.remove('show');
-        });
+        document.getElementById('nombre').addEventListener('input', () => document.getElementById('errNombre').classList.remove('show'));
+        document.getElementById('whatsapp').addEventListener('input', () => document.getElementById('errWhats').classList.remove('show'));
+        document.getElementById('consent').addEventListener('change', () => document.getElementById('errConsent').classList.remove('show'));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal(); });
 
-        // Cerrar con ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
-        });
+        // ============================================
+        // LÓGICA DEL REEL
+        // ============================================
+        const reelPlay = document.getElementById('reelPlay');
+        const reelVideo = document.getElementById('reelVideo');
+        if (reelPlay && reelVideo) {
+            reelPlay.addEventListener('click', () => {
+                reelVideo.preload = 'auto';
+                const p = reelVideo.play();
+                if (p !== undefined) p.then(() => reelPlay.classList.add('hidden')).catch(() => reelPlay.classList.add('hidden'));
+                else reelPlay.classList.add('hidden');
+            });
+            reelVideo.addEventListener('ended', () => reelPlay.classList.remove('hidden'));
+        }
     </script>
 </body>
 </html>
