@@ -226,11 +226,12 @@
             width: 18px; height: 18px;
             fill: #fff; stroke: #fff; stroke-width: 0;
         }
-        .reel-ctrl-btn.muted svg.icon-unmute { display: block; }
-        .reel-ctrl-btn.muted svg.icon-mute { display: none; }
-        .reel-ctrl-btn:not(.muted) svg.icon-unmute { display: none; }
-        .reel-ctrl-btn:not(.muted) svg.icon-mute { display: block; }
-
+        /* Controles del reel: iconos según estado */
+        .reel-ctrl-btn.muted svg.icon-mute { display: block; }
+        .reel-ctrl-btn.muted svg.icon-unmute { display: none; }
+        .reel-ctrl-btn:not(.muted) svg.icon-mute { display: none; }
+        .reel-ctrl-btn:not(.muted) svg.icon-unmute { display: block; }
+        
         /* RESULTADO */
         .result { padding: 4.5rem 1.5rem; background: var(--sage-bg); }
         .result-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
