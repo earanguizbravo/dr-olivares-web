@@ -127,22 +127,33 @@
         .hero-badge .num { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--navy); font-weight: 600; line-height: 1; }
         .hero-badge .txt { font-size: 0.65rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* BENEFICIOS */
-        .benefits { padding: 4.5rem 1.5rem; background: #fff; }
-        .benefits-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
-        .benefits h2 { font-size: 1.9rem; margin: 0.5rem 0 2.5rem; }
-        .benefits-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
-        .benefit-item { padding: 0 1rem; }
-        .benefit-icon {
-            width: 52px; height: 52px; margin: 0 auto 1rem;
-            border-radius: 50%; background: var(--sage-bg);
-            display: flex; align-items: center; justify-content: center;
+        /* MAPA MINI */
+        .hero-map {
+            margin-top: 1.2rem;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(122,158,159,0.2);
+            box-shadow: 0 8px 24px rgba(26,58,92,0.08);
+            max-width: 320px;
         }
-        .benefit-icon svg { width: 22px; height: 22px; stroke: var(--sage); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-        .benefit-item h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
-        .benefit-item p { font-size: 0.85rem; color: var(--text-light); font-weight: 300; max-width: 260px; margin: 0 auto; }
+        .hero-map iframe {
+            width: 100%;
+            height: 140px;
+            border: 0;
+            display: block;
+            filter: saturate(0.85) contrast(1.05);
+        }
+        .hero-map-caption {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+            letter-spacing: 0.3px;
+        }
+        .hero-map-caption strong { color: var(--navy); font-weight: 500; }
+        .hero-map-caption a { color: var(--sage); text-decoration: none; }
+        .hero-map-caption a:hover { color: var(--navy); }
 
-        /* ===== SECCIÓN REEL ===== */
+        /* REEL */
         .reel-section { padding: 5rem 1.5rem; background: var(--navy); }
         .reel-inner {
             max-width: 1000px; margin: 0 auto;
@@ -188,7 +199,6 @@
             color: #fff; font-weight: 500; z-index: 2;
         }
 
-        /* Controles del reel (pause + mute) */
         .reel-controls {
             position: absolute;
             bottom: 1rem;
@@ -222,16 +232,12 @@
             background: rgba(0,0,0,0.7);
             transform: scale(1.08);
         }
-        .reel-ctrl-btn svg {
-            width: 18px; height: 18px;
-            fill: #fff; stroke: #fff; stroke-width: 0;
-        }
-        /* Controles del reel: iconos según estado */
+        .reel-ctrl-btn svg { width: 18px; height: 18px; fill: #fff; stroke: #fff; stroke-width: 0; }
         .reel-ctrl-btn.muted svg.icon-mute { display: block; }
         .reel-ctrl-btn.muted svg.icon-unmute { display: none; }
         .reel-ctrl-btn:not(.muted) svg.icon-mute { display: none; }
         .reel-ctrl-btn:not(.muted) svg.icon-unmute { display: block; }
-        
+
         /* RESULTADO */
         .result { padding: 4.5rem 1.5rem; background: var(--sage-bg); }
         .result-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
@@ -251,6 +257,21 @@
         .result-tag.before { background: rgba(255,255,255,0.9); color: var(--navy); }
         .result-tag.after { background: var(--navy); color: #fff; }
         .result-caption { margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-light); font-weight: 300; font-style: italic; }
+
+        /* BENEFICIOS */
+        .benefits { padding: 4.5rem 1.5rem; background: #fff; }
+        .benefits-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+        .benefits h2 { font-size: 1.9rem; margin: 0.5rem 0 2.5rem; }
+        .benefits-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+        .benefit-item { padding: 0 1rem; }
+        .benefit-icon {
+            width: 52px; height: 52px; margin: 0 auto 1rem;
+            border-radius: 50%; background: var(--sage-bg);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .benefit-icon svg { width: 22px; height: 22px; stroke: var(--sage); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .benefit-item h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
+        .benefit-item p { font-size: 0.85rem; color: var(--text-light); font-weight: 300; max-width: 260px; margin: 0 auto; }
 
         /* CTA FINAL */
         .cta { padding: 5rem 1.5rem; background: var(--navy); text-align: center; }
@@ -300,9 +321,7 @@
         .reveal { opacity: 0; transform: translateY(24px); transition: all 0.8s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* ============================================ */
-        /* MODAL DE EVALUACIÓN                          */
-        /* ============================================ */
+        /* MODAL */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -317,10 +336,7 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        .modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
+        .modal-overlay.active { display: flex; opacity: 1; }
         .modal {
             background: #fff;
             border-radius: 20px;
@@ -333,12 +349,9 @@
             transition: transform 0.3s ease;
             box-shadow: 0 30px 80px rgba(0,0,0,0.3);
         }
-        .modal-overlay.active .modal {
-            transform: translateY(0);
-        }
+        .modal-overlay.active .modal { transform: translateY(0); }
         .modal-close {
-            position: absolute;
-            top: 1rem; right: 1rem;
+            position: absolute; top: 1rem; right: 1rem;
             width: 36px; height: 36px;
             border-radius: 50%;
             background: var(--sage-bg);
@@ -360,23 +373,16 @@
         .modal-header h3 { font-size: 1.6rem; margin-bottom: 0.5rem; }
         .modal-header p { font-size: 0.82rem; color: var(--text-light); font-weight: 300; }
 
-        .progress-bar {
-            display: flex;
-            gap: 0.4rem;
-            padding: 1rem 1.5rem 0.5rem;
-        }
+        .progress-bar { display: flex; gap: 0.4rem; padding: 1rem 1.5rem 0.5rem; }
         .progress-step {
-            flex: 1;
-            height: 3px;
-            background: var(--sage-bg);
-            border-radius: 3px;
+            flex: 1; height: 3px;
+            background: var(--sage-bg); border-radius: 3px;
             transition: background 0.4s ease;
         }
         .progress-step.active { background: var(--sage); }
         .progress-step.done { background: var(--navy); }
 
         .modal-body { padding: 1.5rem; }
-
         .step { display: none; animation: fadeStep 0.4s ease; }
         .step.active { display: block; }
         @keyframes fadeStep {
@@ -396,16 +402,11 @@
         .question-number {
             display: inline-block;
             width: 22px; height: 22px;
-            background: var(--sage);
-            color: #fff;
+            background: var(--sage); color: #fff;
             border-radius: 50%;
-            text-align: center;
-            line-height: 22px;
-            font-size: 0.7rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            margin-right: 0.5rem;
-            vertical-align: middle;
+            text-align: center; line-height: 22px;
+            font-size: 0.7rem; font-family: 'Inter', sans-serif; font-weight: 500;
+            margin-right: 0.5rem; vertical-align: middle;
         }
 
         .options { display: flex; flex-direction: column; gap: 0.5rem; }
@@ -417,18 +418,13 @@
             background: var(--sage-bg);
             border: 1.5px solid transparent;
             border-radius: 10px;
-            font-size: 0.85rem;
-            color: var(--text);
-            cursor: pointer;
-            transition: all 0.25s ease;
-            font-weight: 400;
+            font-size: 0.85rem; color: var(--text);
+            cursor: pointer; transition: all 0.25s ease; font-weight: 400;
         }
         .option label:hover { background: #e6eeef; }
         .option input:checked + label {
-            background: #fff;
-            border-color: var(--navy);
-            color: var(--navy);
-            font-weight: 500;
+            background: #fff; border-color: var(--navy);
+            color: var(--navy); font-weight: 500;
             box-shadow: 0 4px 12px rgba(26,58,92,0.08);
         }
 
@@ -438,8 +434,7 @@
             border: 1.5px solid rgba(122,158,159,0.3);
             border-radius: 10px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            color: var(--text);
+            font-size: 0.9rem; color: var(--text);
             background: var(--sage-bg);
             transition: border-color 0.3s, background 0.3s;
             outline: none;
@@ -542,7 +537,18 @@
                 <div class="divider"></div>
                 <p>MiniLipopapada: tratamiento de precisión para eliminar la grasa bajo el mentón. Sin cirugía, sin reposo y con resultados naturales.</p>
                 <button class="btn-primary open-modal">Agendar evaluación gratuita</button>
-                <p class="hero-note">Cupos limitados · <strong>Atención en Av. Providencia 1208</strong></p>
+                <div class="hero-map">
+                    <iframe
+                        src="https://www.google.com/maps?q=Av.+Providencia+1208,+Santiago,+Chile&output=embed"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Ubicación Dr. Rodrigo Olivares">
+                    </iframe>
+                </div>
+                <p class="hero-map-caption">
+                    <strong>Av. Providencia 1208, Santiago</strong> ·
+                    <a href="https://maps.google.com/?q=Av.+Providencia+1208,+Santiago,+Chile" target="_blank" rel="noopener">Ver en Google Maps →</a>
+                </p>
             </div>
             <div class="hero-img reveal">
                 <div class="hero-img-frame">
@@ -551,37 +557,6 @@
                 <div class="hero-badge">
                     <div class="num">+3.000</div>
                     <div class="txt">Pacientes atendidos</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- BENEFICIOS -->
-    <section class="benefits">
-        <div class="benefits-inner">
-            <span class="label">El tratamiento</span>
-            <h2>Sencillo, preciso, elegante</h2>
-            <div class="benefits-grid">
-                <div class="benefit-item reveal">
-                    <div class="benefit-icon">
-                        <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    </div>
-                    <h3>30 minutos</h3>
-                    <p>Una sola sesión en consulta ambulatoria, sin quirófano ni anestesia general.</p>
-                </div>
-                <div class="benefit-item reveal">
-                    <div class="benefit-icon">
-                        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
-                    </div>
-                    <h3>Recuperación 24h</h3>
-                    <p>Retoma tu vida laboral y social al día siguiente, sin moretones visibles.</p>
-                </div>
-                <div class="benefit-item reveal">
-                    <div class="benefit-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    </div>
-                    <h3>Resultados naturales</h3>
-                    <p>Perfil armonioso que respeta tu identidad. Nadie sabrá, solo notarán.</p>
                 </div>
             </div>
         </div>
@@ -608,7 +583,6 @@
                             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
                     </div>
-                    <!-- Controles flotantes: pausa + mute -->
                     <div class="reel-controls" id="reelControls">
                         <button type="button" class="reel-ctrl-btn" id="reelPauseBtn" aria-label="Pausar">
                             <svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
@@ -642,6 +616,37 @@
         </div>
     </section>
 
+    <!-- BENEFICIOS (despriorizada, al final) -->
+    <section class="benefits">
+        <div class="benefits-inner">
+            <span class="label">El tratamiento</span>
+            <h2>Sencillo, preciso, elegante</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item reveal">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3>30 minutos</h3>
+                    <p>Una sola sesión en consulta ambulatoria, sin quirófano ni anestesia general.</p>
+                </div>
+                <div class="benefit-item reveal">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                    </div>
+                    <h3>Recuperación 24h</h3>
+                    <p>Retoma tu vida laboral y social al día siguiente, sin moretones visibles.</p>
+                </div>
+                <div class="benefit-item reveal">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Resultados naturales</h3>
+                    <p>Perfil armonioso que respeta tu identidad. Nadie sabrá, solo notarán.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA FINAL -->
     <section class="cta">
         <span class="label">Evaluación sin costo</span>
@@ -655,12 +660,12 @@
 
     <footer>© 2026 Dr. Rodrigo Olivares · Cirujano Dentista · Especialista en Armonización Orofacial</footer>
 
-    <!-- FAB WHATSAPP (ahora abre el formulario) -->
-    <button class="fab-wa open-modal" aria-label="Agendar por WhatsApp">
+    <!-- FAB WHATSAPP (abre formulario) -->
+    <button class="fab-wa open-modal" aria-label="Agendar evaluación">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </button>
 
-    <!-- MODAL DE EVALUACIÓN PRELIMINAR -->
+    <!-- MODAL DE EVALUACIÓN -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" role="dialog" aria-modal="true">
             <button class="modal-close" id="modalClose" aria-label="Cerrar">
@@ -800,7 +805,7 @@
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // ============================================
-        // LÓGICA DEL MODAL
+        // MODAL
         // ============================================
         const modalOverlay = document.getElementById('modalOverlay');
         const modalClose = document.getElementById('modalClose');
@@ -902,7 +907,7 @@
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal(); });
 
         // ============================================
-        // LÓGICA DEL REEL (play + pause + mute)
+        // REEL (play + pause + mute, arranca con sonido)
         // ============================================
         const reelPlay = document.getElementById('reelPlay');
         const reelVideo = document.getElementById('reelVideo');
@@ -911,7 +916,6 @@
         const reelMuteBtn = document.getElementById('reelMuteBtn');
 
         if (reelPlay && reelVideo) {
-            // Click en overlay grande → reproducir
             reelPlay.addEventListener('click', () => {
                 reelVideo.preload = 'auto';
                 const p = reelVideo.play();
@@ -926,7 +930,6 @@
                 }
             });
 
-            // Click en botón pausa → pausa y vuelve el overlay grande
             reelPauseBtn.addEventListener('click', () => {
                 if (reelVideo.paused) {
                     reelVideo.play();
@@ -939,13 +942,11 @@
                 }
             });
 
-            // Click en botón mute → toggle
             reelMuteBtn.addEventListener('click', () => {
                 reelVideo.muted = !reelVideo.muted;
                 reelMuteBtn.classList.toggle('muted', reelVideo.muted);
             });
 
-            // Al terminar el video, vuelve el overlay
             reelVideo.addEventListener('ended', () => {
                 reelPlay.classList.remove('hidden');
                 reelControls.classList.remove('visible');
