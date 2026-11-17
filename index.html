@@ -168,6 +168,7 @@
             position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
             background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.55));
             cursor: pointer; transition: opacity 0.4s ease;
+            z-index: 3;
         }
         .reel-play-btn {
             width: 64px; height: 64px; border-radius: 50%;
@@ -186,6 +187,49 @@
             font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
             color: #fff; font-weight: 500; z-index: 2;
         }
+
+        /* Controles del reel (pause + mute) */
+        .reel-controls {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 4;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+        .reel-controls.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .reel-ctrl-btn {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            padding: 0;
+        }
+        .reel-ctrl-btn:hover {
+            background: rgba(0,0,0,0.7);
+            transform: scale(1.08);
+        }
+        .reel-ctrl-btn svg {
+            width: 18px; height: 18px;
+            fill: #fff; stroke: #fff; stroke-width: 0;
+        }
+        .reel-ctrl-btn.muted svg.icon-unmute { display: block; }
+        .reel-ctrl-btn.muted svg.icon-mute { display: none; }
+        .reel-ctrl-btn:not(.muted) svg.icon-unmute { display: none; }
+        .reel-ctrl-btn:not(.muted) svg.icon-mute { display: block; }
 
         /* RESULTADO */
         .result { padding: 4.5rem 1.5rem; background: var(--sage-bg); }
@@ -239,6 +283,8 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.2);
             transition: transform 0.3s;
             text-decoration: none;
+            border: none; cursor: pointer;
+            padding: 0;
         }
         .fab-wa:hover { transform: scale(1.1); }
         .fab-wa svg { width: 26px; height: 26px; fill: #fff; }
@@ -553,13 +599,23 @@
             <div class="reel-wrap reveal">
                 <div class="reel-frame" id="reelFrame">
                     <span class="reel-corner">▶ Reel</span>
-                    <video id="reelVideo" poster="reel-poster.jpg" playsinline preload="none" disablepictureinpicture controlslist="nodownload">
+                    <video id="reelVideo" poster="reel-poster.jpg" playsinline preload="none" muted disablepictureinpicture controlslist="nodownload">
                         <source src="reel-minilipopapada.mp4" type="video/mp4">
                     </video>
                     <div class="reel-play" id="reelPlay" role="button" aria-label="Reproducir reel">
                         <div class="reel-play-btn">
                             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
+                    </div>
+                    <!-- Controles flotantes: pausa + mute -->
+                    <div class="reel-controls" id="reelControls">
+                        <button type="button" class="reel-ctrl-btn" id="reelPauseBtn" aria-label="Pausar">
+                            <svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+                        </button>
+                        <button type="button" class="reel-ctrl-btn muted" id="reelMuteBtn" aria-label="Activar sonido">
+                            <svg class="icon-mute" viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0014 8.03v2.21l2.45 2.45c.03-.22.05-.45.05-.69zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.8 8.8 0 0021 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 003.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                            <svg class="icon-unmute" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 8.03v7.94c1.48-.73 2.5-2.25 2.5-3.97zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -598,10 +654,10 @@
 
     <footer>© 2026 Dr. Rodrigo Olivares · Cirujano Dentista · Especialista en Armonización Orofacial</footer>
 
-    <!-- FAB WHATSAPP -->
-    <a href="https://wa.me/56956620576?text=Hola%20Dr.%20Olivares%2C%20quiero%20info%20sobre%20MiniLipopapada" class="fab-wa" aria-label="WhatsApp">
+    <!-- FAB WHATSAPP (ahora abre el formulario) -->
+    <button class="fab-wa open-modal" aria-label="Agendar por WhatsApp">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    </a>
+    </button>
 
     <!-- MODAL DE EVALUACIÓN PRELIMINAR -->
     <div class="modal-overlay" id="modalOverlay">
@@ -706,17 +762,12 @@
                     </div>
                 </div>
 
-                <!-- PASO 4 -->
+                <!-- PASO 4: solo nombre + consentimiento -->
                 <div class="step" data-step="4">
                     <div class="question">
                         <label class="question-label" for="nombre">Nombre completo</label>
                         <input type="text" id="nombre" name="nombre" class="text-input" placeholder="Tu nombre y apellido" required>
                         <div class="error-msg" id="errNombre">Por favor ingresa tu nombre completo</div>
-                    </div>
-                    <div class="question">
-                        <label class="question-label" for="whatsapp">Número de WhatsApp</label>
-                        <input type="tel" id="whatsapp" name="whatsapp" class="text-input" placeholder="+56 9 1234 5678" required>
-                        <div class="error-msg" id="errWhats">Ingresa un número válido (mínimo 9 dígitos)</div>
                     </div>
                     <div class="consent-box">
                         <input type="checkbox" id="consent" name="consent" required>
@@ -802,14 +853,10 @@
             }
             if (step === 4) {
                 const nombre = document.getElementById('nombre').value.trim();
-                const whatsapp = document.getElementById('whatsapp').value.trim();
                 const consent = document.getElementById('consent').checked;
                 let valid = true;
                 if (nombre.length < 3) { document.getElementById('errNombre').classList.add('show'); valid = false; }
                 else { document.getElementById('errNombre').classList.remove('show'); }
-                const digits = whatsapp.replace(/\D/g, '');
-                if (digits.length < 9) { document.getElementById('errWhats').classList.add('show'); valid = false; }
-                else { document.getElementById('errWhats').classList.remove('show'); }
                 if (!consent) { document.getElementById('errConsent').classList.add('show'); valid = false; }
                 else { document.getElementById('errConsent').classList.remove('show'); }
                 return valid;
@@ -831,7 +878,6 @@
                 return el ? el.value : '-';
             };
             const nombre = document.getElementById('nombre').value.trim();
-            const whatsapp = document.getElementById('whatsapp').value.trim();
             const mensaje = `Hola Dr. Olivares, completé la evaluación preliminar para MiniLipopapada:%0A%0A` +
                 `📋 *EVALUACIÓN:*%0A` +
                 `• Objetivo: ${encodeURIComponent(getVal('objetivo'))}%0A` +
@@ -843,8 +889,7 @@
                 `• Embarazo/lactancia: ${encodeURIComponent(getVal('embarazo'))}%0A` +
                 `• Timing: ${encodeURIComponent(getVal('timing'))}%0A%0A` +
                 `👤 *DATOS DE CONTACTO:*%0A` +
-                `• Nombre: ${encodeURIComponent(nombre)}%0A` +
-                `• WhatsApp: ${encodeURIComponent(whatsapp)}%0A%0A` +
+                `• Nombre: ${encodeURIComponent(nombre)}%0A%0A` +
                 `✅ Consiento tratamiento de datos (Ley 19.628)`;
             const url = `https://wa.me/56956620576?text=${mensaje}`;
             window.open(url, '_blank');
@@ -852,23 +897,59 @@
         });
 
         document.getElementById('nombre').addEventListener('input', () => document.getElementById('errNombre').classList.remove('show'));
-        document.getElementById('whatsapp').addEventListener('input', () => document.getElementById('errWhats').classList.remove('show'));
         document.getElementById('consent').addEventListener('change', () => document.getElementById('errConsent').classList.remove('show'));
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal(); });
 
         // ============================================
-        // LÓGICA DEL REEL
+        // LÓGICA DEL REEL (play + pause + mute)
         // ============================================
         const reelPlay = document.getElementById('reelPlay');
         const reelVideo = document.getElementById('reelVideo');
+        const reelControls = document.getElementById('reelControls');
+        const reelPauseBtn = document.getElementById('reelPauseBtn');
+        const reelMuteBtn = document.getElementById('reelMuteBtn');
+
         if (reelPlay && reelVideo) {
+            // Click en overlay grande → reproducir
             reelPlay.addEventListener('click', () => {
                 reelVideo.preload = 'auto';
                 const p = reelVideo.play();
-                if (p !== undefined) p.then(() => reelPlay.classList.add('hidden')).catch(() => reelPlay.classList.add('hidden'));
-                else reelPlay.classList.add('hidden');
+                if (p !== undefined) {
+                    p.then(() => {
+                        reelPlay.classList.add('hidden');
+                        reelControls.classList.add('visible');
+                    }).catch(() => reelPlay.classList.add('hidden'));
+                } else {
+                    reelPlay.classList.add('hidden');
+                    reelControls.classList.add('visible');
+                }
             });
-            reelVideo.addEventListener('ended', () => reelPlay.classList.remove('hidden'));
+
+            // Click en botón pausa → pausa y vuelve el overlay grande
+            reelPauseBtn.addEventListener('click', () => {
+                if (reelVideo.paused) {
+                    reelVideo.play();
+                    reelPauseBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+                } else {
+                    reelVideo.pause();
+                    reelPauseBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+                    reelPlay.classList.remove('hidden');
+                    reelControls.classList.remove('visible');
+                }
+            });
+
+            // Click en botón mute → toggle
+            reelMuteBtn.addEventListener('click', () => {
+                reelVideo.muted = !reelVideo.muted;
+                reelMuteBtn.classList.toggle('muted', reelVideo.muted);
+            });
+
+            // Al terminar el video, vuelve el overlay
+            reelVideo.addEventListener('ended', () => {
+                reelPlay.classList.remove('hidden');
+                reelControls.classList.remove('visible');
+                reelPauseBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+            });
         }
     </script>
 </body>
