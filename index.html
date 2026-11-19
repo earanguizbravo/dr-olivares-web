@@ -30,46 +30,30 @@
         .nav-cta { padding: 0.5rem 1.3rem; background: var(--gold); color: #000 !important; text-decoration: none; font-size: 0.7rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 50px; transition: all 0.3s; cursor: pointer; border: none; font-family: 'Inter', sans-serif; }
         .nav-cta:hover { background: var(--gold-light); }
 
-        /* HERO - Título y foto en paralelo, resto al 100% */
+        /* HERO */
         .hero { min-height: 92vh; display: flex; align-items: flex-start; background: #000; padding: 5.5rem 0.8rem 2.5rem; position: relative; overflow: hidden; }
         .hero::before { display: none; }
-        .hero-grid { 
-            width: 100%;
-            max-width: 1000px; margin: 0 auto; 
-            display: grid; 
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 0.8rem;
-            align-items: start;
-            position: relative; z-index: 1; 
-        }
+        .hero-grid { width: 100%; max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 0.8rem; align-items: start; position: relative; z-index: 1; }
         .hero .label { color: var(--gold); letter-spacing: 1.5px; font-size: 0.55rem; font-weight: 600; margin-bottom: 0.2rem; }
         .hero h1 { color: #fff; font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; margin: 0.4rem 0 0; }
         .hero h1 em { font-style: italic; color: var(--gold); text-transform: none; letter-spacing: 0; }
         .hero .divider { background: var(--gold); margin: 0.6rem 0; width: 24px; height: 1px; }
         
-        /* Texto, botón y mapa al 100% del ancho */
-        .hero-full-width {
-            grid-column: 1 / -1; /* Ocupa todas las columnas */
-            margin-top: 0.5rem;
-        }
+        .hero-full-width { grid-column: 1 / -1; margin-top: 0.5rem; }
         .hero-full-width p { color: rgba(255,255,255,0.75); font-weight: 300; font-size: 0.8rem; margin: 0.6rem 0 0.9rem; line-height: 1.5; }
         .hero-full-width p strong { color: var(--gold); font-weight: 500; }
         
-        /* Botón al 100% */
         .btn-primary { display: block; width: 100%; text-align: center; padding: 0.85rem 1rem; background: var(--gold); color: #000; text-decoration: none; font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; border-radius: 50px; transition: all 0.35s ease; box-shadow: 0 8px 24px rgba(201,169,97,0.3); cursor: pointer; border: none; font-family: 'Inter', sans-serif; margin-bottom: 0.8rem; }
         .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(201,169,97,0.4); }
         
-        /* Foto a la derecha */
         .hero-img { position: relative; align-self: start; }
         .hero-img-frame { border-radius: 120px 120px 12px 12px; overflow: hidden; border: 1px solid rgba(201,169,97,0.4); box-shadow: 0 15px 30px rgba(0,0,0,0.6); aspect-ratio: 3/4; background: #111; width: 100%; }
         .hero-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
         
-        /* Badge OCULTO en móvil */
         .hero-badge { display: none; }
         .hero-badge .num { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold); font-weight: 600; line-height: 1; }
         .hero-badge .txt { font-size: 0.55rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Mapa al 100% */
         .hero-map { margin-top: 0; border-radius: 8px; overflow: hidden; border: 1px solid rgba(201,169,97,0.3); box-shadow: 0 8px 24px rgba(0,0,0,0.4); width: 100%; max-width: 100%; }
         .hero-map iframe { width: 100%; height: 120px; border: 0; display: block; filter: grayscale(100%) invert(92%) contrast(83%); }
         .hero-map-caption { font-size: 0.65rem; color: rgba(255,255,255,0.6); margin-top: 0.3rem; letter-spacing: 0.3px; line-height: 1.3; }
@@ -197,51 +181,33 @@
         .error-msg { font-size: 0.75rem; color: var(--accent); margin-top: 0.4rem; display: none; }
         .error-msg.show { display: block; }
 
-        /* ============================================
-           DESKTOP: FIX del "desarme"
-           La foto abarca ambas filas y el texto sube
-           al lado del título. Mobile NO se toca.
-           ============================================ */
+        /* DESKTOP */
         @media (min-width: 768px) {
             .hero { padding: 7rem 1.5rem 4rem; }
-            .hero-grid { 
-                grid-template-columns: 1.1fr 0.9fr; 
-                gap: 4rem;
-                grid-template-rows: auto auto;
-            }
-            
-            /* Posicionamiento explícito SIN tocar el HTML */
-            .hero-grid > div:nth-child(1) { grid-column: 1; grid-row: 1; }     /* título */
-            .hero-grid > div:nth-child(2) { grid-column: 2; grid-row: 1 / 3; } /* foto abraza ambas filas */
-            .hero-grid > div:nth-child(3) { grid-column: 1; grid-row: 2; }     /* texto+botón+mapa bajo el título */
-            
+            .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; grid-template-rows: auto auto; }
+            .hero-grid > div:nth-child(1) { grid-column: 1; grid-row: 1; }
+            .hero-grid > div:nth-child(2) { grid-column: 2; grid-row: 1 / 3; }
+            .hero-grid > div:nth-child(3) { grid-column: 1; grid-row: 2; }
             .hero .label { font-size: 0.75rem; letter-spacing: 4px; margin-bottom: 0.5rem; }
             .hero h1 { font-size: 3.2rem; letter-spacing: 2px; margin: 1rem 0 0; }
             .hero .divider { margin: 1.5rem 0; width: 40px; }
-            
             .hero-full-width { grid-column: 1; grid-row: 2; margin-top: 0; }
             .hero-full-width p { font-size: 0.95rem; margin: 0 0 1.5rem; line-height: 1.8; }
             .btn-primary { display: inline-block; width: auto; padding: 1rem 2.2rem; font-size: 0.78rem; letter-spacing: 1.5px; margin-bottom: 1.5rem; }
-            
             .hero-img-frame { border-radius: 200px 200px 20px 20px; }
-            
             .hero-badge { display: block; position: absolute; bottom: 1.5rem; left: -0.5rem; background: #111; border-radius: 10px; padding: 0.9rem 1.2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid rgba(201,169,97,0.3); }
             .hero-badge .num { font-size: 1.5rem; }
             .hero-badge .txt { font-size: 0.65rem; }
-            
             .hero-map { max-width: 320px; }
             .hero-map iframe { height: 140px; }
             .hero-map-caption { font-size: 0.72rem; margin-top: 0.5rem; }
-            
             .reel-section { padding: 5rem 1.5rem; }
             .reel-inner { grid-template-columns: 0.95fr 1.05fr; gap: 4rem; }
             .reel-wrap { order: 0; }
             .reel-frame { max-width: 340px; }
             .reel-section h2 { font-size: 2.4rem; }
-            
             .result { padding: 4.5rem 1.5rem; }
             .result h2 { font-size: 1.9rem; }
-            
             .benefits { padding: 4.5rem 1.5rem; }
             .benefits h2 { font-size: 2rem; }
             .benefits-grid { grid-template-columns: repeat(4, 1fr); }
@@ -250,10 +216,8 @@
             .benefit-icon svg { width: 22px; height: 22px; }
             .benefit-item h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
             .benefit-item p { font-size: 0.85rem; max-width: 260px; }
-            
             .cta { padding: 5rem 1.5rem; }
             .cta h2 { font-size: 2.2rem; }
-            
             .fab-wa { width: 54px; height: 54px; bottom: 1.5rem; right: 1.5rem; }
             .fab-wa svg { width: 26px; height: 26px; }
         }
@@ -273,20 +237,15 @@
 
     <section class="hero">
         <div class="hero-grid">
-            <!-- Título en columna izquierda -->
             <div class="reveal">
                 <span class="label">Tecnología de última generación</span>
                 <h1>Endolift Facial<br>+ Endolaser de <em>Papada</em></h1>
                 <div class="divider"></div>
             </div>
-            
-            <!-- Foto en columna derecha -->
             <div class="hero-img reveal">
                 <div class="hero-img-frame"><img src="dr-olivares.jpg" alt="Dr. Rodrigo Olivares"></div>
                 <div class="hero-badge"><div class="num">+3.000</div><div class="txt">Pacientes atendidos</div></div>
             </div>
-            
-            <!-- Texto, botón y mapa al 100% del ancho -->
             <div class="hero-full-width reveal">
                 <p>Rejuvenece tu rostro, elimina la papada y redefine tu perfil <strong>sin cirugía</strong>. Tratamiento mínimamente invasivo con resultados visibles desde el primer día.</p>
                 <button class="btn-primary open-modal">Agendar evaluación gratuita</button>
@@ -336,7 +295,7 @@
                 <div class="result-img reveal"><img src="antes.jpg" alt="Antes"><span class="result-tag before">Antes</span></div>
                 <div class="result-img reveal"><img src="despues.jpg" alt="Después"><span class="result-tag after">Después</span></div>
             </div>
-            <p class="result-caption">Paciente femenina, 62 años · Resultado a 30 días post-tratamiento. Cada caso es evaluado de forma personalizada.</p>
+            <p class="result-caption">Paciente femenina, 38 años · Resultado a 30 días post-tratamiento. Cada caso es evaluado de forma personalizada.</p>
         </div>
     </section>
 
@@ -394,8 +353,20 @@
                     <div class="question"><label class="question-label"><span class="question-number">8</span>¿Cuándo te gustaría realizarte el procedimiento?</label><div class="options"><div class="option"><input type="radio" name="timing" id="tim1" value="Lo antes posible" required><label for="tim1">Lo antes posible</label></div><div class="option"><input type="radio" name="timing" id="tim2" value="Durante el próximo mes"><label for="tim2">Durante el próximo mes</label></div><div class="option"><input type="radio" name="timing" id="tim3" value="En los próximos 3 meses"><label for="tim3">En los próximos 3 meses</label></div><div class="option"><input type="radio" name="timing" id="tim4" value="Solo estoy cotizando"><label for="tim4">Solo estoy cotizando</label></div></div></div>
                 </div>
                 <div class="step" data-step="4">
-                    <div class="question"><label class="question-label" for="nombre">Nombre completo</label><input type="text" id="nombre" name="nombre" class="text-input" placeholder="Tu nombre y apellido" required><div class="error-msg" id="errNombre">Por favor ingresa tu nombre completo</div></div>
-                    <div class="consent-box"><input type="checkbox" id="consent" name="consent" required><label for="consent"><strong>Consentimiento informado:</strong> Autorizo el tratamiento de mis datos personales y sensibles de salud conforme a la <strong>Ley 19.628</strong> sobre Protección de la Vida Privada, para acceder a la Preevaluación Online con el Dr. Rodrigo Olivares.</label></div>
+                    <div class="question">
+                        <label class="question-label" for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" class="text-input" placeholder="Tu nombre y apellido" required>
+                        <div class="error-msg" id="errNombre">Por favor ingresa tu nombre completo</div>
+                    </div>
+                    <div class="question">
+                        <label class="question-label" for="whatsapp">Número de WhatsApp</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" class="text-input" placeholder="+56 9 1234 5678" required>
+                        <div class="error-msg" id="errWhats">Ingresa un número válido (mínimo 9 dígitos)</div>
+                    </div>
+                    <div class="consent-box">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent"><strong>Consentimiento informado:</strong> Autorizo el tratamiento de mis datos personales y sensibles de salud conforme a la <strong>Ley 19.628</strong> sobre Protección de la Vida Privada, para acceder a la Preevaluación Online con el Dr. Rodrigo Olivares.</label>
+                    </div>
                     <div class="error-msg" id="errConsent" style="margin-top:0.5rem;">Debes aceptar el consentimiento para continuar</div>
                 </div>
             </form>
@@ -448,10 +419,20 @@
             for (const radio of radios) { if (!stepEl.querySelector(`input[name="${radio.name}"]:checked`)) return false; }
             if (step === 4) {
                 const nombre = document.getElementById('nombre').value.trim();
+                const whatsapp = document.getElementById('whatsapp').value.trim();
                 const consent = document.getElementById('consent').checked;
                 let valid = true;
-                if (nombre.length < 3) { document.getElementById('errNombre').classList.add('show'); valid = false; } else { document.getElementById('errNombre').classList.remove('show'); }
-                if (!consent) { document.getElementById('errConsent').classList.add('show'); valid = false; } else { document.getElementById('errConsent').classList.remove('show'); }
+                
+                if (nombre.length < 3) { document.getElementById('errNombre').classList.add('show'); valid = false; } 
+                else { document.getElementById('errNombre').classList.remove('show'); }
+                
+                const digits = whatsapp.replace(/\D/g, '');
+                if (digits.length < 9) { document.getElementById('errWhats').classList.add('show'); valid = false; } 
+                else { document.getElementById('errWhats').classList.remove('show'); }
+                
+                if (!consent) { document.getElementById('errConsent').classList.add('show'); valid = false; } 
+                else { document.getElementById('errConsent').classList.remove('show'); }
+                
                 return valid;
             }
             return true;
@@ -464,11 +445,19 @@
             if (!validateStep(4)) return;
             const getVal = (name) => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : '-'; };
             const nombre = document.getElementById('nombre').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
             
             const sheetData = {
-                nombre: nombre, objetivo: getVal('objetivo'), papada: getVal('papada'), edad: getVal('edad'),
-                previo: getVal('previo'), enfermedad: getVal('enfermedad'), medicamentos: getVal('medicamentos'),
-                embarazo: getVal('embarazo'), timing: getVal('timing'), whatsapp: 'Enviado desde WhatsApp'
+                nombre: nombre, 
+                objetivo: getVal('objetivo'), 
+                papada: getVal('papada'), 
+                edad: getVal('edad'),
+                previo: getVal('previo'), 
+                enfermedad: getVal('enfermedad'), 
+                medicamentos: getVal('medicamentos'),
+                embarazo: getVal('embarazo'), 
+                timing: getVal('timing'), 
+                whatsapp: whatsapp // ✅ INYECTADO AQUÍ
             };
             
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzg7uAkgE5Tcg7vJcmX-uMJO4tV7h6ITiRY7ap8bkrBF9glH0o9VwceP19bwl-ttQ1p/exec';
@@ -479,8 +468,17 @@
             
             const mensaje = `Hola Dr. Olivares, completé la preevaluación online para Endolift + Endolaser:%0A%0A` +
                 `📋 *PREEVALUACIÓN:*%0A` +
-                `• Objetivo: ${encodeURIComponent(getVal('objetivo'))}%0A• Papada: ${encodeURIComponent(getVal('papada'))}%0A• Edad: ${encodeURIComponent(getVal('edad'))}%0A• Procedimientos previos: ${encodeURIComponent(getVal('previo'))}%0A• Condición médica: ${encodeURIComponent(getVal('enfermedad'))}%0A• Medicamentos: ${encodeURIComponent(getVal('medicamentos'))}%0A• Embarazo/lactancia: ${encodeURIComponent(getVal('embarazo'))}%0A• Timing: ${encodeURIComponent(getVal('timing'))}%0A%0A` +
-                `👤 *DATOS DE CONTACTO:*%0A• Nombre: ${encodeURIComponent(nombre)}%0A%0A` +
+                `• Objetivo: ${encodeURIComponent(getVal('objetivo'))}%0A` +
+                `• Papada: ${encodeURIComponent(getVal('papada'))}%0A` +
+                `• Edad: ${encodeURIComponent(getVal('edad'))}%0A` +
+                `• Procedimientos previos: ${encodeURIComponent(getVal('previo'))}%0A` +
+                `• Condición médica: ${encodeURIComponent(getVal('enfermedad'))}%0A` +
+                `• Medicamentos: ${encodeURIComponent(getVal('medicamentos'))}%0A` +
+                `• Embarazo/lactancia: ${encodeURIComponent(getVal('embarazo'))}%0A` +
+                `• Timing: ${encodeURIComponent(getVal('timing'))}%0A%0A` +
+                `👤 *DATOS DE CONTACTO:*%0A` +
+                `• Nombre: ${encodeURIComponent(nombre)}%0A` +
+                `• WhatsApp: ${encodeURIComponent(whatsapp)}%0A%0A` +
                 `✅ Consiento tratamiento de datos (Ley 19.628)`;
             
             window.open(`https://wa.me/56956620576?text=${mensaje}`, '_blank');
@@ -488,6 +486,7 @@
         });
 
         document.getElementById('nombre').addEventListener('input', () => document.getElementById('errNombre').classList.remove('show'));
+        document.getElementById('whatsapp').addEventListener('input', () => document.getElementById('errWhats').classList.remove('show'));
         document.getElementById('consent').addEventListener('change', () => document.getElementById('errConsent').classList.remove('show'));
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal(); });
 
